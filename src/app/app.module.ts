@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HelloComponent } from './tournament/hello/hello.component';
@@ -16,8 +17,13 @@ import { BracketsComponent } from './tournament/brackets/brackets.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
-  ],
+    RouterModule.forRoot([
+    {path: 'hello', component: HelloComponent},
+    {path: 'registration', component: RegistrationComponent},
+    {path: 'brackets', component: BracketsComponent},
+    {path: '', component: HelloComponent}
+  ]),
+],
   providers: [],
   bootstrap: [AppComponent]
 })
