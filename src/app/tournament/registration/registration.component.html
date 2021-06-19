@@ -1,5 +1,5 @@
 <h1>Register Players</h1>
-<p></p>
+<p>{{players}}</p>
 <div class="form-group">
   <form>
     <div *ngFor="let player of players; let i=index; trackBy:trackByFn">
@@ -8,7 +8,7 @@
       name="contestant[i]"
       placeholder="Contestant {{i}}"><br>
     </div>
-    <button type="submit" (click)="registerContestants()">Register Contestants</button><br>
+    <button type="submit" (click)="registerContestants(players)">Register Contestants</button><br>
     <button>Autofill 2 Players</button>
     <button>Autofill 4 Players</button>
     <button>Autofill 8 Players</button>

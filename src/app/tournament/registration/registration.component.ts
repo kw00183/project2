@@ -36,14 +36,20 @@ export class RegistrationComponent {
     return index;
   }
 
-  registerContestants() {
-//    this.players.push(contestant0);
-//    this.players.push(contestant1);
-//    this.players.push(contestant2);
-//    this.players.push(contestant3);
-//    this.players.push(contestant4);
-//    this.players.push(contestant5);
-//    this.players.push(contestant6);
-//    this.players.push(contestant7);
+  registerContestants(players: Array<string>) {
+    for (let i = 0; i < players.length; i++) {
+      if (players[i] != null
+        && players[i] != ''
+        && players.toString().toLowerCase().indexOf(player[i].toLowerCase()) === -1)
+        this.players.push(players[i]);
+    }
+
+    if (this.players.length == 2
+      || this.players.length == 4
+      || this.players.length == 8) {
+      for (let i = 0; i < this.players.length; i++) {
+        rosterService.addContestant(this.players[i]);
+      }
+    }
   }
 }
