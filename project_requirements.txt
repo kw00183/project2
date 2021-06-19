@@ -1,4 +1,4 @@
-Required changes to project and test settings
+<!-- ##### Required Project Changes ##### //-->
 
 While inside your project directory, install the following packages via npm install --save-dev:
 
@@ -22,3 +22,36 @@ Then in karma.conf.js, make the following changes:
 
     In addition to using Firefox as the browser for testing, this switches it to "headless" mode, meaning the browser window doesn't actually display during testing. The tests themselves still think they are executing in a browser window, however. Headless mode is needed later when we still want to run these sorts of tests, but they will run in a Continuous Integration environment without a graphical desktop.
     change autoWatch: true to false and singleRun: false to true to keep Karma from running in the background
+
+<!-- ##### Confirm Node Version ##### //-->
+
+node --version
+npm --v
+
+<!-- ##### Install Typescript ##### //-->
+
+npm install -g typescript
+
+<!-- ##### Install Angular CLI ##### //-->
+
+npm install -g @angular/cli
+
+<!-- ##### Clone Angular Up and Running Git ##### //-->
+
+git clone https://github.com/shyamseshadri/angular-up-and-running.git
+
+<!-- ##### Create New Application ##### //-->
+
+ng new stock-market
+
+<!-- ##### Run Application ##### //-->
+
+ng serve
+
+<!-- ##### Generate Component ##### //-->
+
+ng generate component stock/stock-item
+
+<!-- ##### Generate Model ##### //-->
+
+ng generate class model/stock
