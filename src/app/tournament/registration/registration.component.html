@@ -1,43 +1,44 @@
 <h1>Register Players</h1>
+<p>Form Control value: {{ contestantsForm.value | json }}</p>
 <div class="form-group">
-  <form>
+  <form [formGroup]="contestantsForm" (ngSubmit)="onSubmit()">
     <ul>
       <li><input type="text"
         placeholder="Contestant 0"
         required
-        name="contestant0">
-        [formControl]="contestant0Control"</li>
+        name="contestant0"
+        formControlName="contestant0"></li>
       <li><input type="text"
         placeholder="Contestant 1"
         required
-        name="contestant1">
-        [formControl]="contestant1Control"</li>
+        name="contestant1"
+        formControlName="contestant1"></li>
       <li><input type="text"
         placeholder="Contestant 2"
-        name="contestant2">
-        [formControl]="contestant2Control"</li>
+        name="contestant2"
+        formControlName="contestant2"></li>
       <li><input type="text"
         placeholder="Contestant 3"
-        name="contestant3">
-        [formControl]="contestant3Control"</li>
+        name="contestant3"
+        formControlName="contestant3"></li>
       <li><input type="text"
         placeholder="Contestant 4"
-        name="contestant4">
-        [formControl]="contestant4Control"</li>
+        name="contestant4"
+        formControlName="contestant4"></li>
       <li><input type="text"
         placeholder="Contestant 5"
-        name="contestant5">
-        [formControl]="contestant5Control"</li>
+        name="contestant5"
+        formControlName="contestant5"></li>
       <li><input type="text"
         placeholder="Contestant 6"
-        name="contestant6">
-        [formControl]="contestant6Control"</li>
+        name="contestant6"
+        formControlName="contestant6"></li>
       <li><input type="text"
         placeholder="Contestant 7"
-        name="contestant7">
-        [formControl]="contestant7Control"</li>
+        name="contestant7"
+        formControlName="contestant7"></li>
     </ul>
-    <button (click)="onSubmit()">Register Contestants</button><br>
+    <button type="submit">Register Contestants</button><br>
     <button>Autofill 2 Players</button>
     <button>Autofill 4 Players</button>
     <button>Autofill 8 Players</button>

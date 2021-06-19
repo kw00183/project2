@@ -8,6 +8,8 @@ import { HelloComponent } from './tournament/hello/hello.component';
 import { RegistrationComponent } from './tournament/registration/registration.component';
 import { BracketsComponent } from './tournament/brackets/brackets.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,6 +19,8 @@ import { BracketsComponent } from './tournament/brackets/brackets.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
     {path: 'hello', component: HelloComponent},
     {path: 'registration', component: RegistrationComponent},
