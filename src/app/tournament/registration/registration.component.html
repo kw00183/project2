@@ -1,5 +1,5 @@
 <h1>Register Players</h1>
-<p>Form Control value: {{ contestantsForm.value | json }}</p>
+<p>{{ contestantsForm.value | json }}</p>
 <div class="form-group">
   <form [formGroup]="contestantsForm" (ngSubmit)="onSubmit()">
     <ul>
