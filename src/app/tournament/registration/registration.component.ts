@@ -13,21 +13,14 @@ import { RosterService } from '../../services/roster.service';
 
 export class RegistrationComponent {
 
-  public players: Array<string>;
+  public players: string[];
   public informationMessages: string;
-
-//  public contestantsForm: FormGroup = new FormGroup({
-//    contestant0: new FormControl(null, [Validators.minLength(2)]),
-//    contestant1: new FormControl(null, [Validators.minLength(2)]),
-//    contestant2: new FormControl(null, [Validators.minLength(2)]),
-//    contestant3: new FormControl(null, [Validators.minLength(2)]),
-//    contestant4: new FormControl(null, [Validators.minLength(2)]),
-//    contestant5: new FormControl(null, [Validators.minLength(2)]),
-//    contestant6: new FormControl(null, [Validators.minLength(2)]),
-//    contestant7: new FormControl(null, [Validators.minLength(2)])
-//  });
+//  public rosterService: RosterService;
 
   constructor(rosterService: RosterService) {
+    private rosterService: RosterService;
+//    this.rosterService = new RosterService();
+//    this.rosterService = rosterService;
     this.informationMessages = '';
     this.players = ['','','','','','','',''];
   }
@@ -36,19 +29,21 @@ export class RegistrationComponent {
     return index;
   }
 
-  registerContestants(players: Array<string>) {
+  registerContestants(players: string[]) {
+    console.log('helpme' + players);
     for (let i = 0; i < players.length; i++) {
       if (players[i] != null
         && players[i] != ''
-        && players.toString().toLowerCase().indexOf(player[i].toLowerCase()) === -1)
+        && players.toString().toLowerCase().indexOf(players[i].toLowerCase()) === -1)
         this.players.push(players[i]);
+        console.log('playme' + players[i]);
     }
 
     if (this.players.length == 2
       || this.players.length == 4
       || this.players.length == 8) {
       for (let i = 0; i < this.players.length; i++) {
-        rosterService.addContestant(this.players[i]);
+        this.rosterService.addContestant(this.players[i]);
       }
     }
   }

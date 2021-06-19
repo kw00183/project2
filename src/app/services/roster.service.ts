@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class RosterService {
 
-  private contestants: Array<string>;
+  private contestants: string[];
   public player: string;
 
   constructor() {
