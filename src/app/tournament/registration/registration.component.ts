@@ -10,9 +10,15 @@ export class RegistrationComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(public fb: FormBuilder) {
+    this.form = this.fb.group({
+      name: [''],
+    })
   }
 
+  ngOnInit() { }
+
+  onSubmit() {
+    console.log('Name Control Value', this.form.value);
+  }
 }
