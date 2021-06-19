@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class RosterService {
 
-  private contestants;
+  private contestants: Array<string>;
   public player: string;
 
   constructor() {
@@ -21,8 +21,8 @@ export class RosterService {
     try {
       if (player != null
         && player != ""
-        && this.contestants.toLowerCase().indexOf(player.toLowerCase()) === -1 ) {
-        this.contestants[player];
+        && this.contestants.toString().toLowerCase().indexOf(player.toLowerCase()) === -1) {
+        this.contestants.push(player);
       } else if (player == null) {
         throw new Error('Name cannot be null');
       } else if (player == "") {
@@ -32,7 +32,7 @@ export class RosterService {
       }
     }
     catch(e) {
-      console.log(e);
+//      console.log(e);
     }
   }
 }
