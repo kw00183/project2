@@ -15,7 +15,6 @@ export class RegistrationComponent implements OnInit {
 
   public players: string[];
   public informationMessages: string;
-  public serviceContestants: string[] = [];
   public observableContestants: string[] = [];
 
   constructor(private rosterService: RosterService) {
@@ -48,7 +47,6 @@ export class RegistrationComponent implements OnInit {
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
       }
-//      this.serviceContestants = this.rosterService.getContestants();
     }
   }
 }
