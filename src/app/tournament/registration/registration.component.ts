@@ -11,18 +11,22 @@ import { RosterService } from '../../services/roster.service';
   styleUrls: ['./registration.component.css']
 })
 
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
 
   public players: string[];
   public informationMessages: string;
-//  public rosterService: RosterService;
+  public serviceContestants: string[] = [];
+  public observableContestants: string[] = [];
 
-  constructor(rosterService: RosterService) {
-    private rosterService: RosterService;
-//    this.rosterService = new RosterService();
-//    this.rosterService = rosterService;
+  constructor(private rosterService: RosterService) {
     this.informationMessages = '';
     this.players = ['','','','','','','',''];
+  }
+
+  ngOnInit() {
+    this.rosterService.contestants$.subscribe(contestants => {
+      this.observableContestants = contestants;
+    });
   }
 
   trackByFn(index: any, item: any) {
@@ -30,21 +34,21 @@ export class RegistrationComponent {
   }
 
   registerContestants(players: string[]) {
-    console.log('helpme' + players);
     for (let i = 0; i < players.length; i++) {
       if (players[i] != null
         && players[i] != ''
         && players.toString().toLowerCase().indexOf(players[i].toLowerCase()) === -1)
         this.players.push(players[i]);
-        console.log('playme' + players[i]);
     }
 
-    if (this.players.length == 2
-      || this.players.length == 4
-      || this.players.length == 8) {
+    let countPlayers = this.players.filter(name => name != '').length;
+    if (countPlayers == 2
+      || countPlayers == 4
+      || countPlayers == 8) {
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
       }
+//      this.serviceContestants = this.rosterService.getContestants();
     }
   }
 }

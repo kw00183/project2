@@ -1,5 +1,5 @@
 <h1>Register Players</h1>
-<p>{{players}}</p>
+<p><span *ngFor="let contestant of observableContestants; index as i; count as c;">{{ contestant }}<span *ngIf="i+1 != c">,</span></span></p>
 <div class="form-group">
   <form>
     <div *ngFor="let player of players; let i=index; trackBy:trackByFn">

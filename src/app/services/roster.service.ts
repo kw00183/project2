@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RosterService {
 
-  private contestants: string[];
+  public contestants: string[];
+  public contestants$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public player: string;
 
   constructor() {
@@ -23,6 +25,7 @@ export class RosterService {
         && player != ""
         && this.contestants.toString().toLowerCase().indexOf(player.toLowerCase()) === -1) {
         this.contestants.push(player);
+        this.contestants$.next(this.contestants);
       } else if (player == null) {
         throw new Error('Name cannot be null');
       } else if (player == "") {
