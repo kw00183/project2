@@ -13,4 +13,11 @@ describe('RosterService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should not allow duplicate names', () => {
+    const rosterService = new RosterService();
+    rosterService.addContestant('Kim');
+    expect(rosterService.addContestant('Kim')).toBeFalsy();
+  });
+
 });

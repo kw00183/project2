@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class RosterService {
 
-  private contestants: Contestants[];
+  private contestants;
   public player: string;
 
   constructor() {
@@ -13,7 +13,7 @@ export class RosterService {
     this.player = "";
   }
 
-  getContestants() : Contestants[] {
+  getContestants() {
     return this.contestants;
   }
 
@@ -21,11 +21,11 @@ export class RosterService {
     try {
       if (player != null && player != "" && this.contestants.indexOf(player) === -1 ) {
         this.contestants[player];
-      } elseif (player == null) {
+      } else if (player == null) {
         throw new Error('Name cannot be null');
-      } elseif (player == "") {
+      } else if (player == "") {
         throw new Error('Name cannot be empty');
-      } elseif (this.contestants.indexOf(player) !== -1) {
+      } else if (this.contestants.indexOf(player) !== -1) {
         throw new Error('Name already exists');
       }
     }
