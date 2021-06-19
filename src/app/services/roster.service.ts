@@ -19,7 +19,9 @@ export class RosterService {
 
   addContestant(player: string) {
     try {
-      if (player != null && player != "" && this.contestants.indexOf(player) === -1 ) {
+      if (player != null
+        && player != ""
+        && this.contestants.toLowerCase().indexOf(player.toLowerCase()) === -1 ) {
         this.contestants[player];
       } else if (player == null) {
         throw new Error('Name cannot be null');
