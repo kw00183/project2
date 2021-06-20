@@ -1,5 +1,5 @@
 <h1>Register Players</h1>
-<p><span *ngFor="let contestant of observableContestants; index as i; count as c;">{{ contestant }}<span *ngIf="i+1 != c">,</span></span></p>
+<p><span *ngFor="let contestant of observableContestants; index as i; count as c;">{{ contestant }}<span *ngIf="i + 1 != c">,</span></span></p>
 <p *ngIf="informationMessages != ''">{{ informationMessages }}</p>
 <div class="form-group">
   <form>
@@ -7,7 +7,7 @@
       <input type="text"
       [(ngModel)]="players[i]"
       name="players[i]"
-      placeholder="Contestant {{i}}"><br>
+      placeholder="Contestant {{i + 1}}"><br>
     </div>
     <button type="submit" (click)="registerContestants(players)">Register Contestants</button><br>
     <button>Autofill 2 Players</button>

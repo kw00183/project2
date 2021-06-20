@@ -32,30 +32,51 @@ export class RegistrationComponent implements OnInit {
     return index;
   }
 
+  toLowerCase(player: string) {
+    if (typeof(player) === 'string') {
+      return player.toLowerCase();
+    }
+    return player;
+  }
+
+  checkDuplicates(players: string[]) {
+    let enteredPlayers = players.filter(name => name != '');
+    let dedupedPlayers = new Map(enteredPlayers.map(s => [s.toLowerCase(), s]));
+    let countEnteredPlayers = enteredPlayers.length;
+    let countDedupedPlayers = dedupedPlayers.size;
+    return countEnteredPlayers === countDedupedPlayers;
+  }
+
   registerContestants(players: string[]) {
     for (let i = 0; i < players.length; i++) {
-      if (players[i] != null
-        && players[i] != ''
-        && this.players.toString().toLowerCase().indexOf(players[i].toLowerCase()) === -1) {
-        this.players.push(players[i]);
-      } else if (players[i] == null) {
+      if (players[i] == null) {
         this.players.push('');
+      } else {
+        this.players.push(players[i]);
       }
     }
 
+    this.observableContestants = [];
+    this.rosterService.clearContestants();
+    this.informationMessages = '';
+
     let countPlayers = this.players.filter(name => name != '').length;
-    if (countPlayers === 2
-      || countPlayers === 4
-      || countPlayers === 8) {
-      this.informationMessages = '';
+    if (this.players[0] == ''
+      || this.players[1] == '') {
+        this.informationMessages = 'Contestant 1 and 2 are required';
+    } else if (this.players[0] != ''
+      && this.players[1] != ''
+      && this.players[2] == ''
+      && this.players[3] != ''
+      && this.checkDuplicates(this.players)) {
+        this.informationMessages = 'Contestants 1-4 require valid names with no duplicates';
+    } else if (countPlayers == 8
+      && !this.checkDuplicates(this.players)) {
+        this.informationMessages = 'Contestants 1-8 require valid names with no duplicates';
+    } else {
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
       }
-    } else {
-      this.observableContestants = [];
-      this.rosterService.clearContestants();
-      this.informationMessages = 'Must have pairs of 2, 4 or 8 total valid players with no duplicates';
     }
-    console.log(this.players.toString());
   }
 }
