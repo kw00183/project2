@@ -19,6 +19,10 @@ export class RosterService {
     return this.contestants;
   }
 
+  clearContestants() {
+    this.contestants = [];
+  }
+
   addContestant(player: string) {
     try {
       if (player != null

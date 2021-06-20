@@ -36,17 +36,26 @@ export class RegistrationComponent implements OnInit {
     for (let i = 0; i < players.length; i++) {
       if (players[i] != null
         && players[i] != ''
-        && players.toString().toLowerCase().indexOf(players[i].toLowerCase()) === -1)
+        && this.players.toString().toLowerCase().indexOf(players[i].toLowerCase()) === -1) {
         this.players.push(players[i]);
+      } else if (players[i] == null) {
+        this.players.push('');
+      }
     }
 
     let countPlayers = this.players.filter(name => name != '').length;
-    if (countPlayers == 2
-      || countPlayers == 4
-      || countPlayers == 8) {
+    if (countPlayers === 2
+      || countPlayers === 4
+      || countPlayers === 8) {
+      this.informationMessages = '';
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
       }
+    } else {
+      this.observableContestants = [];
+      this.rosterService.clearContestants();
+      this.informationMessages = 'Must have pairs of 2, 4 or 8 total valid players with no duplicates';
     }
+    console.log(this.players.toString());
   }
 }
