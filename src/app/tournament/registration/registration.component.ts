@@ -68,11 +68,13 @@ export class RegistrationComponent implements OnInit {
     if (this.checkDuplicates(this.players) == true) {
       this.informationMessages = 'Contestant names cannot be duplicated';
     } else if (countPlayers > 4 && countPlayers < 8) {
-        this.informationMessages = 'All 8 Contestants require valid names';
-    } else if (countPlayers < 5 && (this.players[0] == '' || this.players[1] == '' || this.players[2] == '' || this.players[3] == '')) {
-        this.informationMessages = 'Contestants 1-4 require valid names with no duplicates';
+      this.informationMessages = 'All 8 Contestants require valid names';
+    } else if (countPlayers > 2 && (this.players[0] == '' || this.players[1] == '' || this.players[2] == '' || this.players[3] == '')) {
+      this.informationMessages = 'Contestants 1-4 require valid names with no duplicates';
     } else if (this.players[0] == '' || this.players[1] == '') {
-        this.informationMessages = 'Contestants 1 and 2 require valid names';
+      this.informationMessages = 'Contestants 1 and 2 require valid names';
+    } else if (countPlayers == 0) {
+      this.informationMessages = 'Contestants cannot be empty';
     } else if (countPlayers == 2 || countPlayers == 4 || countPlayers == 8) {
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
