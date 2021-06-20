@@ -1,1 +1,2 @@
-<p>brackets works!</p>
+<h1>Bracket Players</h1>
+<p><span *ngFor="let contestant of observableContestants; index as i; count as c;">{{ contestant }}<span *ngIf="i + 1 != c">,</span></span></p>

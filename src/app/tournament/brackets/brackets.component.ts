@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { RosterService } from '../../services/roster.service';
+
 @Component({
   selector: 'app-brackets',
   templateUrl: './brackets.component.html',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BracketsComponent implements OnInit {
 
-  constructor() { }
+  public observableContestants: string[] = [];
 
-  ngOnInit(): void {
+  constructor(private rosterService: RosterService) { }
+
+  ngOnInit() {
+    this.rosterService.contestants$.subscribe(contestants => {
+      this.observableContestants = contestants;
+    });
   }
-
 }
