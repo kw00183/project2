@@ -38,6 +38,11 @@ describe('RosterService', () => {
     expect(rosterService.addContestant('')).toBeFalsy();
   });
 
+  it('should not allow empty string names of spaces', () => {
+    const rosterService = new RosterService();
+    expect(rosterService.addContestant('  ')).toBeFalsy();
+  });
+
   it('should add one contestant', () => {
     const rosterService = new RosterService();
     rosterService.addContestant('Jen');
