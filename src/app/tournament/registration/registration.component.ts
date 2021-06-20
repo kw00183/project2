@@ -41,7 +41,7 @@ export class RegistrationComponent implements OnInit {
 
   checkDuplicates(players: string[]) {
     let enteredPlayers = players.filter(name => name != '');
-    let dedupedPlayers = new Map(enteredPlayers.map(s => [s.toLowerCase(), s]));
+    let dedupedPlayers = new Map(enteredPlayers.map(s => [s.trim().toLowerCase(), s]));
     let countEnteredPlayers = enteredPlayers.length;
     let countDedupedPlayers = dedupedPlayers.size;
 
@@ -56,7 +56,7 @@ export class RegistrationComponent implements OnInit {
       if (players[i] == null) {
         this.players[i] = '';
       } else {
-        this.players[i] = players[i];
+        this.players[i] = players[i].trim();
       }
     }
 

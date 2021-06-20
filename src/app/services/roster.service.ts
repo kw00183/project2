@@ -26,15 +26,15 @@ export class RosterService {
   addContestant(player: string) {
     try {
       if (player != null
-        && player != ""
-        && this.contestants.toString().toLowerCase().indexOf(player.toLowerCase()) === -1) {
+        && player.trim() != ""
+        && this.contestants.toString().toLowerCase().indexOf(player.trim().toLowerCase()) === -1) {
         this.contestants.push(player);
         this.contestants$.next(this.contestants);
       } else if (player == null) {
         throw new Error('Name cannot be null');
-      } else if (player == "") {
+      } else if (player == "" || player.trim() == "") {
         throw new Error('Name cannot be empty');
-      } else if (this.contestants.indexOf(player) !== -1) {
+      } else if (this.contestants.toString().toLowerCase().indexOf(player.trim().toLowerCase()) !== -1) {
         throw new Error('Name already exists');
       }
     }
