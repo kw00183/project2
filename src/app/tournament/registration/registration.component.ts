@@ -54,9 +54,9 @@ export class RegistrationComponent implements OnInit {
   registerContestants(players: string[]) {
     for (let i = 0; i < players.length; i++) {
       if (players[i] == null) {
-        this.players.push('');
+        this.players[i] = '';
       } else {
-        this.players.push(players[i]);
+        this.players[i] = players[i];
       }
     }
 
@@ -73,8 +73,6 @@ export class RegistrationComponent implements OnInit {
       this.informationMessages = 'Contestants 1-4 require valid names with no duplicates';
     } else if (this.players[0] == '' || this.players[1] == '') {
       this.informationMessages = 'Contestants 1 and 2 require valid names';
-    } else if (countPlayers == 0) {
-      this.informationMessages = 'Contestants cannot be empty';
     } else if (countPlayers == 2 || countPlayers == 4 || countPlayers == 8) {
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
