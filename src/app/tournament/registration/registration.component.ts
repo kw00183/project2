@@ -44,7 +44,11 @@ export class RegistrationComponent implements OnInit {
     let dedupedPlayers = new Map(enteredPlayers.map(s => [s.toLowerCase(), s]));
     let countEnteredPlayers = enteredPlayers.length;
     let countDedupedPlayers = dedupedPlayers.size;
-    return countEnteredPlayers === countDedupedPlayers;
+
+    if (countEnteredPlayers === countDedupedPlayers) {
+      return false;
+    }
+    return true;
   }
 
   registerContestants(players: string[]) {
@@ -61,19 +65,15 @@ export class RegistrationComponent implements OnInit {
     this.informationMessages = '';
 
     let countPlayers = this.players.filter(name => name != '').length;
-    if (this.players[0] == ''
-      || this.players[1] == '') {
-        this.informationMessages = 'Contestant 1 and 2 are required';
-    } else if (this.players[0] != ''
-      && this.players[1] != ''
-      && this.players[2] == ''
-      && this.players[3] != ''
-      && this.checkDuplicates(this.players)) {
+    if (this.checkDuplicates(this.players) == true) {
+      this.informationMessages = 'Contestant names cannot be duplicated';
+    } else if (countPlayers > 4 && countPlayers < 8) {
+        this.informationMessages = 'All 8 Contestants require valid names';
+    } else if (countPlayers < 5 && (this.players[0] == '' || this.players[1] == '' || this.players[2] == '' || this.players[3] == '')) {
         this.informationMessages = 'Contestants 1-4 require valid names with no duplicates';
-    } else if (countPlayers == 8
-      && !this.checkDuplicates(this.players)) {
-        this.informationMessages = 'Contestants 1-8 require valid names with no duplicates';
-    } else {
+    } else if (this.players[0] == '' || this.players[1] == '') {
+        this.informationMessages = 'Contestants 1 and 2 require valid names';
+    } else if (countPlayers == 2 || countPlayers == 4 || countPlayers == 8) {
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
       }
