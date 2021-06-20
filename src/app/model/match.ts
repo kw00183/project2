@@ -9,7 +9,11 @@ export class Match {
     this.match = [];
     this.player1 = player1;
     this.player2 = player2;
-    this.winner = winner;
+    if (winner == null || winner == "") {
+      this.winner = "";
+    } else {
+      this.winner = winner;
+    }
   }
 
   validName(player: string): boolean {
@@ -30,8 +34,14 @@ export class Match {
   }
 
   setMatch(): void {
-    if (this.validName(this.player1) && this.validName(this.player2) && this.validName(this.winner)) {
+    if (this.validName(this.player1) && this.validName(this.player2)) {
       this.match = [this.player1,this.player2,this.winner];
+    }
+  }
+
+  setWinner(winner: string): void {
+    if (this.validName(winner)) {
+      this.winner = winner;
     }
   }
 

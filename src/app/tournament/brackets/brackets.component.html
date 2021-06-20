@@ -1,2 +1,10 @@
-<h1>Bracket Players</h1>
-<p><span *ngFor="let contestant of observableContestants; index as i; count as c;">{{ contestant }}<span *ngIf="i + 1 != c">,</span></span></p>
+<h1>Round: 1</h1>
+<div class="form-group">
+  <form>
+    <div *ngFor="let bracket of brackets; let i=index; trackBy:trackByFn">
+      <p>Match {{ i + 1}}</p>
+      <input type="radio" name="match{{i}}" value="bracket[0]"> {{ bracket[0] }}
+      <input type="radio" name="match{{i}}" value="bracket[1]"> {{ bracket[1] }}
+    </div>
+    <button type="submit">Complete Round</button>
+  </form>

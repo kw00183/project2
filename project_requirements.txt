@@ -55,3 +55,7 @@ ng generate component stock/stock-item
 <!-- ##### Generate Model ##### //-->
 
 ng generate class model/stock
+
+<!-- ##### Generate Service ##### //-->
+
+ng generate service services/round
