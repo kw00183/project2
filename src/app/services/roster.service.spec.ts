@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { RosterService } from './roster.service';
 
 describe('RosterService', () => {
   let service: RosterService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [ FormsModule ]
+    });
     service = TestBed.inject(RosterService);
   });
 
