@@ -3,8 +3,8 @@
   <form>
     <div *ngFor="let bracket of brackets; let i=index; trackBy:trackByFn">
       <p>Match {{ i + 1}}</p>
-      <input type="radio" name="match{{i}}" value="bracket[0]"> {{ bracket[0] }}
-      <input type="radio" name="match{{i}}" value="bracket[1]"> {{ bracket[1] }}
+      <input type="radio" name="match{{i}}" value="{{ bracket[0] }}" [(ngModel)]="bracket[2]"> {{ bracket[0] }}
+      <input type="radio" name="match{{i}}" value="{{ bracket[1] }}" [(ngModel)]="bracket[2]"> {{ bracket[1] }}
     </div>
-    <button type="submit">Complete Round</button>
+    <button type="submit" (click)="selectWinners(brackets)">Complete Round</button>
   </form>

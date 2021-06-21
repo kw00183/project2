@@ -18,11 +18,13 @@ export class BracketsComponent implements OnInit {
   public brackets: Array<string[]>;
   public contestants: string[];
   public numberOfRounds: number = 0;
+  public informationMessages: string;
 
   public match: Match;
 
   constructor(private rosterService: RosterService, private winnerService: WinnerService) {
     this.brackets = [];
+    this.informationMessages = '';
   }
 
   ngOnInit() {
@@ -37,10 +39,6 @@ export class BracketsComponent implements OnInit {
 
   trackByFn(index: any, item: any) {
     return index;
-  }
-
-  trackRounds() {
-
   }
 
   getNumberOfRounds() {
@@ -58,25 +56,45 @@ export class BracketsComponent implements OnInit {
     return this.brackets;
   }
 
+  selectWinners(winners: Array<string[]> ) {
+    this.informationMessages = '';
+    let allChosen = true;
+    for (let i = 0; i < winners.length; i++) {
+      if (winners[i][2] == "") {
+        this.informationMessages = 'You must select a winner for all matches';
+        allChosen = false;
+      }
+    }
+    if (allChosen == true) {
+      this.informationMessages = '';
+//      this.winnerService.addContestant(this.players[i]);
+    }
+  }
+
   createBrackets() {
     let bracket1 = [];
     let bracket2 = [];
     let bracket3 = [];
     let bracket4 = [];
-    if (this.contestants[1] != "") {
+    if (this.contestants.length == 8) {
       bracket1 = new Match(this.contestants[0],this.contestants[1],'').getMatch();
-      this.brackets[0] = bracket1;
-    }
-    if (this.contestants[3] != "") {
       bracket2 = new Match(this.contestants[2],this.contestants[3],'').getMatch();
-      this.brackets[1] = bracket2;
-    }
-    if (this.contestants[7] != "") {
       bracket3 = new Match(this.contestants[4],this.contestants[5],'').getMatch();
       bracket4 = new Match(this.contestants[6],this.contestants[7],'').getMatch();
-
+      this.brackets[0] = bracket1;
+      this.brackets[1] = bracket2;
       this.brackets[2] = bracket3;
       this.brackets[3] = bracket4;
+    } else if (this.contestants.length == 4) {
+      bracket1 = new Match(this.contestants[0],this.contestants[1],'').getMatch();
+      bracket2 = new Match(this.contestants[2],this.contestants[3],'').getMatch();
+      this.brackets[0] = bracket1;
+      this.brackets[1] = bracket2;
+    } else if (this.contestants.length == 2) {
+      bracket1 = new Match(this.contestants[0],this.contestants[1],'').getMatch();
+      this.brackets[0] = bracket1;
+    } else {
+      this.brackets = [];
     }
   }
 }
