@@ -25,7 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     {path: 'hello', component: HelloComponent},
     {path: 'registration', component: RegistrationComponent},
     {path: 'brackets', component: BracketsComponent},
-    {path: '', component: HelloComponent}
+    {path: '**', component: HelloComponent}
   ]),
 ],
   providers: [],
