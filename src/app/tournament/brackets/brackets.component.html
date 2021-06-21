@@ -1,11 +1,12 @@
 <h1>Round: {{ observableCurrentRound }}</h1>
 <p *ngIf="informationMessages != ''">{{ informationMessages }}</p>
 <div class="form-group">
-  <form>
+  <form (ngSubmit)="selectWinners(brackets)">
     <div *ngFor="let bracket of brackets; let i=index; trackBy:trackByFn">
       <p>Match {{ i + 1}}</p>
       <input type="radio" name="match{{i}}" value="{{ bracket[0] }}" [(ngModel)]="bracket[2]"> {{ bracket[0] }}
       <input type="radio" name="match{{i}}" value="{{ bracket[1] }}" [(ngModel)]="bracket[2]"> {{ bracket[1] }}
     </div>
-    <button type="submit" (click)="selectWinners(brackets)">Complete Round</button>
+    <button type="submit">Complete Round</button>
   </form>
+</div>

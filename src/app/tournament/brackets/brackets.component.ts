@@ -40,15 +40,16 @@ export class BracketsComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.winnerService.winners$.subscribe(winners => {
-      this.observableWinners = winners;
-    });
-    this.winnerService.finalWinner$.subscribe(finalWinner => {
-      this.observableFinalWinner = finalWinner;
-    });
-    this.winnerService.currentRound$.subscribe(currentRound => {
-      this.observableCurrentRound = currentRound;
-    });
+//    this.winnerService.winners$.subscribe(winners => {
+//      this.observableWinners = winners;
+//    });
+//    this.winnerService.finalWinner$.subscribe(finalWinner => {
+//      this.observableFinalWinner = finalWinner;
+//    });
+//    this.winnerService.currentRound$.subscribe(currentRound => {
+//      this.observableCurrentRound = currentRound;
+//    });
+    console.log('did this change?');
     this.getBrackets();
   }
 
