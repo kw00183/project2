@@ -1,9 +1,9 @@
 <h1>Round: {{ observableCurrentRound }}</h1>
 <p *ngIf="informationMessages != ''">{{ informationMessages }}</p>
-<div *ngIf="finalWinner != ''">
-  <p>Winner: {{ finalWinner }}</p>
+<div *ngIf="observableFinalWinner != ''">
+  <p>Winner: {{ observableFinalWinner }}</p>
 </div>
-<div *ngIf="finalWinner == ''">
+<div *ngIf="observableFinalWinner == ''">
   <div class="form-group">
     <form (ngSubmit)="selectWinners(brackets)">
       <div *ngFor="let bracket of brackets; let i=index; trackBy:trackByFn">

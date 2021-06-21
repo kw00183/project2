@@ -51,6 +51,18 @@ export class RegistrationComponent implements OnInit {
     return true;
   }
 
+  autofill2Players(): void {
+    this.players = ['Zoe','Kaylee','','','','','',''];
+  }
+
+  autofill4Players() {
+    this.players = ['John','Paul','George','Ringo','','','',''];
+  }
+
+  autofill8Players() {
+    this.players = ['Sally','Joe','Cindy','Bob','Everett','Lewis','Anja','Li'];
+  }
+
   registerContestants(players: string[]) {
     for (let i = 0; i < players.length; i++) {
       if (players[i] == null) {

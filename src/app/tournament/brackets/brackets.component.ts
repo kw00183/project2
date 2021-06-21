@@ -57,7 +57,12 @@ export class BracketsComponent implements OnInit {
     return this.brackets;
   }
 
+  resetContestants(): void {
+    this.contestants = [];
+  }
+
   selectWinners(winners: Array<string[]> ) {
+    this.resetContestants();
     this.informationMessages = '';
     let finalWinner = '';
     let allChosen = true;
@@ -70,12 +75,16 @@ export class BracketsComponent implements OnInit {
         winnersNameList[i] = winners[i][2];
       }
     }
-    if (allChosen == true && winnersNameList.length > 1) {
+
+    if (allChosen == true) {
       this.informationMessages = '';
       this.winnerService.addWinners(winnersNameList);
+    }
+
+    if (winnersNameList.length > 1) {
       this.createBrackets();
     } else if (allChosen == true) {
-      finalWinner = this.winnerService.getFinalWinner;
+      this.winnerService.getFinalWinner();
     }
   }
 

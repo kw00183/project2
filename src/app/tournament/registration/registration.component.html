@@ -6,11 +6,11 @@
     <div *ngFor="let player of players; let i=index; trackBy:trackByFn">
       <input type="text"
       [(ngModel)]="players[i]"
-      name="players[i]"
-      placeholder="Contestant {{i + 1}}"><br>
+      name="player{{ i }}"
+      placeholder="Contestant {{ i + 1 }}"><br>
     </div>
     <button type="submit" (click)="registerContestants(players)">Register Contestants</button><br>
-    <button>Autofill 2 Players</button>
-    <button>Autofill 4 Players</button>
-    <button>Autofill 8 Players</button>
+    <button type="submit" (click)="autofill2Players()">Autofill 2 Players</button>
+    <button type="submit" (click)="autofill4Players()">Autofill 4 Players</button>
+    <button type="submit" (click)="autofill8Players()">Autofill 8 Players</button>
   </form>

@@ -19,6 +19,15 @@ export class WinnerService {
     this.currentRound = 1;
   }
 
+  resetWinners(): void {
+    this.winners = [];
+    this.winners$.next(this.winners);
+    this.finalWinner = "";
+    this.finalWinner$.next(this.finalWinner);
+    this.currentRound = 1;
+    this.currentRound$.next(this.currentRound);
+  }
+
   incrementCurrentRound(): void {
     this.currentRound = this.currentRound + 1;
     this.currentRound$.next(this.currentRound);
@@ -44,6 +53,7 @@ export class WinnerService {
   addWinners(winners: string[]) {
     if (winners.length == 1) {
       this.finalWinner = winners[0];
+      this.finalWinner$.next(this.finalWinner);
     } else {
       this.incrementCurrentRound();
     }
