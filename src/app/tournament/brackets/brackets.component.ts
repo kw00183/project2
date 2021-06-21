@@ -36,20 +36,15 @@ export class BracketsComponent implements OnInit {
     this.rosterService.contestants$.subscribe(contestants => {
       this.observableContestants = contestants;
     });
-    this.getBrackets();
-  }
-
-  ngOnChanges() {
-//    this.winnerService.winners$.subscribe(winners => {
-//      this.observableWinners = winners;
-//    });
-//    this.winnerService.finalWinner$.subscribe(finalWinner => {
-//      this.observableFinalWinner = finalWinner;
-//    });
-//    this.winnerService.currentRound$.subscribe(currentRound => {
-//      this.observableCurrentRound = currentRound;
-//    });
-    console.log('did this change?');
+    this.winnerService.winners$.subscribe(winners => {
+      this.observableWinners = winners;
+    });
+    this.winnerService.finalWinner$.subscribe(finalWinner => {
+      this.observableFinalWinner = finalWinner;
+    });
+    this.winnerService.currentRound$.subscribe(currentRound => {
+      this.observableCurrentRound = currentRound;
+    });
     this.getBrackets();
   }
 
@@ -64,24 +59,28 @@ export class BracketsComponent implements OnInit {
 
   selectWinners(winners: Array<string[]> ) {
     this.informationMessages = '';
+    let finalWinner = '';
     let allChosen = true;
-    let winnerNames = [];
+    let winnersNameList = [];
     for (let i = 0; i < winners.length; i++) {
       if (winners[i][2] == "") {
         this.informationMessages = 'You must select a winner for all matches';
         allChosen = false;
       } else {
-        winnerNames[i] = winners[i][2];
+        winnersNameList[i] = winners[i][2];
       }
     }
-    if (allChosen == true) {
+    if (allChosen == true && winnersNameList.length > 1) {
       this.informationMessages = '';
-      this.winnerService.addWinners(winnerNames);
-      console.log('my winners = ' + this.winnerService.getWinners());
+      this.winnerService.addWinners(winnersNameList);
+      this.createBrackets();
+    } else if (allChosen == true) {
+      finalWinner = this.winnerService.getFinalWinner;
     }
   }
 
   createBrackets() {
+    this.brackets = [];
     let matchPlayers = [];
     let currentWinners = this.winnerService.getWinners();
     let bracket1 = [];
