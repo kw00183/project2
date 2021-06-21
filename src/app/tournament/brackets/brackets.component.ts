@@ -18,6 +18,7 @@ export class BracketsComponent implements OnInit {
   public brackets: Array<string[]>;
   public contestants: string[];
   public numberOfRounds: number = 0;
+  public currentRound: number = 0;
   public informationMessages: string;
 
   public match: Match;
@@ -31,14 +32,22 @@ export class BracketsComponent implements OnInit {
     this.rosterService.contestants$.subscribe(contestants => {
       this.contestants = contestants;
     });
-//    this.winnerService.winners$.subscribe(winners => {
-//      this.winners = winners;
-//    });
+    this.winnerService.winners$.subscribe(winners => {
+      this.winners = winners;
+    });
     this.getBrackets();
   }
 
   trackByFn(index: any, item: any) {
     return index;
+  }
+
+  setCurrentRound(round: number) {
+    this.currentRound = round;
+  }
+
+  getCurrentRound(): number {
+    return
   }
 
   getNumberOfRounds() {
@@ -67,31 +76,39 @@ export class BracketsComponent implements OnInit {
     }
     if (allChosen == true) {
       this.informationMessages = '';
-//      this.winnerService.addContestant(this.players[i]);
+      this.winnerService.addWinners(winners);
     }
   }
 
   createBrackets() {
+    let matchPlayers = [];
     let bracket1 = [];
     let bracket2 = [];
     let bracket3 = [];
     let bracket4 = [];
-    if (this.contestants.length == 8) {
-      bracket1 = new Match(this.contestants[0],this.contestants[1],'').getMatch();
-      bracket2 = new Match(this.contestants[2],this.contestants[3],'').getMatch();
-      bracket3 = new Match(this.contestants[4],this.contestants[5],'').getMatch();
-      bracket4 = new Match(this.contestants[6],this.contestants[7],'').getMatch();
+
+    if (this.winners.length > 1) {
+      this.matchPlayers = this.winners;
+    } else if (this.winners.length == 0) {
+      this.matchPlayers = this.contestants;
+    }
+
+    if (matchPlayers.length == 8) {
+      bracket1 = new Match(matchPlayers[0],matchPlayers[1],'').getMatch();
+      bracket2 = new Match(matchPlayers[2],matchPlayers[3],'').getMatch();
+      bracket3 = new Match(matchPlayers[4],matchPlayers[5],'').getMatch();
+      bracket4 = new Match(matchPlayers[6],matchPlayers[7],'').getMatch();
       this.brackets[0] = bracket1;
       this.brackets[1] = bracket2;
       this.brackets[2] = bracket3;
       this.brackets[3] = bracket4;
-    } else if (this.contestants.length == 4) {
-      bracket1 = new Match(this.contestants[0],this.contestants[1],'').getMatch();
-      bracket2 = new Match(this.contestants[2],this.contestants[3],'').getMatch();
+    } else if (matchPlayers.length == 4) {
+      bracket1 = new Match(matchPlayers[0],matchPlayers[1],'').getMatch();
+      bracket2 = new Match(matchPlayers[2],matchPlayers[3],'').getMatch();
       this.brackets[0] = bracket1;
       this.brackets[1] = bracket2;
-    } else if (this.contestants.length == 2) {
-      bracket1 = new Match(this.contestants[0],this.contestants[1],'').getMatch();
+    } else if (matchPlayers.length == 2) {
+      bracket1 = new Match(matchPlayers[0],matchPlayers[1],'').getMatch();
       this.brackets[0] = bracket1;
     } else {
       this.brackets = [];
