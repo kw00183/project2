@@ -17,9 +17,13 @@ export class BracketsComponent implements OnInit {
 
   public brackets: Array<string[]>;
   public contestants: string[];
-  public numberOfRounds: number = 0;
-  public currentRound: number = 0;
+
   public informationMessages: string;
+
+  public observableContestants: string[] = [];
+  public observableWinners: string[] = [];
+  public observableCurrentRound: number = 1;
+  public observableFinalWinner: string = '';
 
   public match: Match;
 
@@ -30,34 +34,26 @@ export class BracketsComponent implements OnInit {
 
   ngOnInit() {
     this.rosterService.contestants$.subscribe(contestants => {
-      this.contestants = contestants;
+      this.observableContestants = contestants;
     });
+    this.getBrackets();
+  }
+
+  ngOnChanges() {
     this.winnerService.winners$.subscribe(winners => {
-      this.winners = winners;
+      this.observableWinners = winners;
+    });
+    this.winnerService.finalWinner$.subscribe(finalWinner => {
+      this.observableFinalWinner = finalWinner;
+    });
+    this.winnerService.currentRound$.subscribe(currentRound => {
+      this.observableCurrentRound = currentRound;
     });
     this.getBrackets();
   }
 
   trackByFn(index: any, item: any) {
     return index;
-  }
-
-  setCurrentRound(round: number) {
-    this.currentRound = round;
-  }
-
-  getCurrentRound(): number {
-    return
-  }
-
-  getNumberOfRounds() {
-    if (this.contestants.length == 2) {
-      this.numberOfRounds = 1;
-    } else if (this.contestants.length == 4) {
-      this.numberOfRounds = 2;
-    } else if (this.contestants.length == 8) {
-      this.numberOfRounds = 3;
-    }
   }
 
   getBrackets(): Array<string[]> {
@@ -68,29 +64,34 @@ export class BracketsComponent implements OnInit {
   selectWinners(winners: Array<string[]> ) {
     this.informationMessages = '';
     let allChosen = true;
+    let winnerNames = [];
     for (let i = 0; i < winners.length; i++) {
       if (winners[i][2] == "") {
         this.informationMessages = 'You must select a winner for all matches';
         allChosen = false;
+      } else {
+        winnerNames[i] = winners[i][2];
       }
     }
     if (allChosen == true) {
       this.informationMessages = '';
-      this.winnerService.addWinners(winners);
+      this.winnerService.addWinners(winnerNames);
+      console.log('my winners = ' + this.winnerService.getWinners());
     }
   }
 
   createBrackets() {
     let matchPlayers = [];
+    let currentWinners = this.winnerService.getWinners();
     let bracket1 = [];
     let bracket2 = [];
     let bracket3 = [];
     let bracket4 = [];
 
-    if (this.winners.length > 1) {
-      this.matchPlayers = this.winners;
-    } else if (this.winners.length == 0) {
-      this.matchPlayers = this.contestants;
+    if (currentWinners.length > 1) {
+      matchPlayers = currentWinners;
+    } else {
+      matchPlayers = this.rosterService.getContestants();
     }
 
     if (matchPlayers.length == 8) {

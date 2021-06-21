@@ -9,28 +9,36 @@ export class WinnerService {
   public winners: string[];
   public winners$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public finalWinner: string;
-  public currentRoundNumber: number;
+  public finalWinner$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  public currentRound: number;
+  public currentRound$: BehaviorSubject<number> = new BehaviorSubject<number>(1);
 
   constructor() {
     this.winners = [];
     this.finalWinner = "";
-    this.currentRoundNumber = 1;
+    this.currentRound = 1;
   }
 
   incrementCurrentRound(): void {
-    this.currentRoundNumber++;
+    this.currentRound = this.currentRound + 1;
+    this.currentRound$.next(this.currentRound);
   }
 
   getCurrentRound(): number {
-    return this.currentRoundNumber;
+    return this.currentRound;
   }
 
   setFinalWinner(finalWinner: string): void {
     this.finalWinner = finalWinner;
+    this.finalWinner$.next(this.finalWinner);
   }
 
   getFinalWinner(): string {
     return this.finalWinner;
+  }
+
+  getWinners(): string[] {
+    return this.winners;
   }
 
   addWinners(winners: string[]) {
@@ -38,8 +46,8 @@ export class WinnerService {
       this.finalWinner = winners[0];
     } else {
       this.incrementCurrentRound();
-      this.winners = winners;
-      this.winners$.next(this.winners);
     }
+    this.winners = winners;
+    this.winners$.next(this.winners);
   }
 }
