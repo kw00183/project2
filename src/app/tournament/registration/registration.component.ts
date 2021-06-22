@@ -93,7 +93,7 @@ export class RegistrationComponent implements OnInit {
       this.informationMessages = 'Contestants 1 and 2 require valid names';
     } else if (countPlayers == 2 || countPlayers == 4 || countPlayers == 8) {
       for (let i = 0; i < this.players.length; i++) {
-        this.rosterService.addContestant(this.players[i]);
+        this.rosterService.addContestant(this.players[i],[i]);
       }
       this.winnerService.resetWinners();
     }

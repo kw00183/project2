@@ -11,7 +11,7 @@ export class RosterService {
   public player: string;
 
   constructor() {
-    this.contestants = [];
+    this.contestants = ['','','','','','','',''];
     this.player = "";
   }
 
@@ -20,16 +20,16 @@ export class RosterService {
   }
 
   clearContestants() {
-    this.contestants = [];
+    this.contestants = ['','','','','','','',''];
     this.contestants$.next(this.contestants);
   }
 
-  addContestant(player: string) {
+  addContestant(player: string, index: number) {
     try {
       if (player != null
         && player.trim() != ""
         && this.contestants.toString().toLowerCase().indexOf(player.trim().toLowerCase()) === -1) {
-        this.contestants.push(player);
+        this.contestants[index] = player;
         this.contestants$.next(this.contestants);
       } else if (player == null) {
         throw new Error('Name cannot be null');
