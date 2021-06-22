@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RosterService } from '../../services/roster.service';
 import { WinnerService } from '../../services/winner.service';
 
+import { RegistrationComponent } from '../registration/registration.component';
+
 import { Match } from '../../model/match';
 
 @Component({
@@ -57,12 +59,7 @@ export class BracketsComponent implements OnInit {
     return this.brackets;
   }
 
-  resetContestants(): void {
-    this.contestants = [];
-  }
-
   selectWinners(winners: Array<string[]> ) {
-    this.resetContestants();
     this.informationMessages = '';
     let finalWinner = '';
     let allChosen = true;
@@ -85,7 +82,15 @@ export class BracketsComponent implements OnInit {
       this.createBrackets();
     } else if (allChosen == true) {
       this.winnerService.getFinalWinner();
+      this.resetServices();
     }
+  }
+
+  resetServices(): void {
+    this.rosterService.clearContestants();
+    this.winnerService.resetWinners();
+    this.observableContestants = ['cray'];
+    this.createBrackets();
   }
 
   createBrackets() {

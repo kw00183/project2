@@ -32,6 +32,10 @@ export class RegistrationComponent implements OnInit {
     return index;
   }
 
+  resetContestants(): void {
+    this.players = ['','','','','','','',''];
+  }
+
   toLowerCase(player: string) {
     if (typeof(player) === 'string') {
       return player.toLowerCase();
@@ -79,7 +83,6 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.observableContestants = [];
-    this.rosterService.clearContestants();
     this.informationMessages = '';
 
     let countPlayers = this.players.filter(name => name != '').length;
