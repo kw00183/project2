@@ -6,12 +6,14 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class RosterService {
 
+  public possibleContestants: string[];
   public contestants: string[];
   public contestants$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public player: string;
 
   constructor() {
-    this.contestants = ['','','','','','','',''];
+    this.possibleContestants = ['','','','','','','',''];
+    this.contestants = [];
     this.player = "";
   }
 
@@ -20,7 +22,8 @@ export class RosterService {
   }
 
   clearContestants() {
-    this.contestants = ['','','','','','','',''];
+    this.possibleContestants = ['','','','','','','',''];
+    this.contestants = [];
     this.contestants$.next(this.contestants);
   }
 
@@ -28,14 +31,15 @@ export class RosterService {
     try {
       if (player != null
         && player.trim() != ""
-        && this.contestants.toString().toLowerCase().indexOf(player.trim().toLowerCase()) === -1) {
-        this.contestants[index] = player;
+        && this.possibleContestants.toString().toLowerCase().indexOf(player.trim().toLowerCase()) === -1) {
+        this.possibleContestants[index] = player;
+        this.contestants = this.possibleContestants.filter(name => name != '');
         this.contestants$.next(this.contestants);
       } else if (player == null) {
         throw new Error('Name cannot be null');
       } else if (player == "" || player.trim() == "") {
         throw new Error('Name cannot be empty');
-      } else if (this.contestants.toString().toLowerCase().indexOf(player.trim().toLowerCase()) !== -1) {
+      } else if (this.possibleContestants.toString().toLowerCase().indexOf(player.trim().toLowerCase()) !== -1) {
         throw new Error('Name already exists');
       }
     }
