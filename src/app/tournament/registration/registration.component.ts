@@ -4,6 +4,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { RosterService } from '../../services/roster.service';
+import { WinnerService } from '../../services/winner.service';
 
 @Component({
   selector: 'app-registration',
@@ -17,7 +18,7 @@ export class RegistrationComponent implements OnInit {
   public informationMessages: string;
   public observableContestants: string[] = [];
 
-  constructor(private rosterService: RosterService) {
+  constructor(private rosterService: RosterService, private winnerService: WinnerService) {
     this.informationMessages = '';
     this.players = ['','','','','','','',''];
   }
@@ -30,10 +31,6 @@ export class RegistrationComponent implements OnInit {
 
   trackByFn(index: any, item: any) {
     return index;
-  }
-
-  resetContestants(): void {
-    this.players = ['','','','','','','',''];
   }
 
   toLowerCase(player: string) {
@@ -98,6 +95,7 @@ export class RegistrationComponent implements OnInit {
       for (let i = 0; i < this.players.length; i++) {
         this.rosterService.addContestant(this.players[i]);
       }
+      this.winnerService.resetWinners();
     }
   }
 }

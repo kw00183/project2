@@ -11,7 +11,7 @@
         <input type="radio" name="match{{i}}" value="{{ bracket[0] }}" [(ngModel)]="bracket[2]"> {{ bracket[0] }}
         <input type="radio" name="match{{i}}" value="{{ bracket[1] }}" [(ngModel)]="bracket[2]"> {{ bracket[1] }}
       </div>
-      <button type="submit">Complete Round</button>
+      <span *ngIf="observableContestants.length > 0"><button type="submit">Complete Round</button></span>
     </form>
   </div>
 </div>

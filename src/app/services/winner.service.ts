@@ -21,7 +21,11 @@ export class WinnerService {
 
   resetWinners(): void {
     this.winners = [];
-    console.log("called resetWinners");
+    this.winners$.next(this.winners);
+    this.finalWinner = "";
+    this.finalWinner$.next(this.finalWinner);
+    this.currentRound = 1;
+    this.currentRound$.next(this.currentRound);
   }
 
   incrementCurrentRound(): void {

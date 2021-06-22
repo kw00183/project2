@@ -59,6 +59,10 @@ export class BracketsComponent implements OnInit {
     return this.brackets;
   }
 
+  resetObservableContestants() {
+    this.rosterService.clearContestants();
+  }
+
   selectWinners(winners: Array<string[]> ) {
     this.informationMessages = '';
     let finalWinner = '';
@@ -82,15 +86,8 @@ export class BracketsComponent implements OnInit {
       this.createBrackets();
     } else if (allChosen == true) {
       this.winnerService.getFinalWinner();
-      this.resetServices();
+      this.resetObservableContestants();
     }
-  }
-
-  resetServices(): void {
-    this.rosterService.clearContestants();
-    this.winnerService.resetWinners();
-    this.observableContestants = ['cray'];
-    this.createBrackets();
   }
 
   createBrackets() {
