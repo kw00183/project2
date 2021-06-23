@@ -35,7 +35,7 @@ export class RegistrationComponent implements OnInit {
 
   toLowerCase(player: string) {
     if (typeof(player) === 'string') {
-      return player.toLowerCase();
+      return player.toLowerCase().trim();
     }
     return player;
   }
@@ -43,7 +43,7 @@ export class RegistrationComponent implements OnInit {
   toLowerCaseArray(players: string[]): string[] {
     let lowerCasePlayers = [];
     for (let i = 0; i < players.length; i++) {
-      lowerCasePlayers.push(players[i].toLowerCase());
+      lowerCasePlayers.push(players[i].toLowerCase().trim());
     }
     return lowerCasePlayers;
   }
@@ -51,12 +51,7 @@ export class RegistrationComponent implements OnInit {
   checkDuplicates(players: string[]) {
     let lowerCasePlayers = this.toLowerCaseArray(players);
     let enteredPlayers = lowerCasePlayers.filter(name => name != '');
-    let uniquePlayers = [];
-
-    enteredPlayers.forEach(function(i){
-      if(!(uniquePlayers.includes(i) || uniquePlayers.includes(i.toLowerCase())))
-        uniquePlayers.push(i)
-    });
+    let uniquePlayers = Array.from(new Set(enteredPlayers));
 
     let countEnteredPlayers = enteredPlayers.length;
     let countDedupedPlayers = uniquePlayers.length;
