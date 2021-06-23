@@ -26,10 +26,34 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('project2');
   });
 
-//  it('should render title', () => {
-//    const fixture = TestBed.createComponent(AppComponent);
-//    fixture.detectChanges();
-//    const compiled = fixture.nativeElement;
-//    expect(compiled.querySelector('.content span').textContent).toContain('project2 app is running!');
-//  });
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('8-Player Tournament Bracket!');
+  });
+
+  it('should render nav welcome', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    const welcome = fixture.debugElement.nativeElement.querySelector('#welcome');
+    expect(welcome.innerHTML).toBe('Welcome');
+  });
+
+  it('should render nav brackets', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    const brackets = fixture.debugElement.nativeElement.querySelector('#brackets');
+    expect(brackets.innerHTML).toBe('Brackets');
+  });
+
+  it('should render nav registration', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    const registration = fixture.debugElement.nativeElement.querySelector('#registration');
+    expect(registration.innerHTML).toBe('Registration');
+  });
 });

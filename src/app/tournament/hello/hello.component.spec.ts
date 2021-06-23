@@ -23,4 +23,11 @@ describe('HelloComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(HelloComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('Brackets App');
+  });
 });
