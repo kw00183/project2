@@ -7,7 +7,7 @@
       <input type="text"
       [(ngModel)]="players[i]"
       name="player{{ i }}"
-      placeholder="Contestant {{ i + 1 }}"><br>
+      placeholder="Contestant {{ i }}"><br>
     </div>
     <button type="submit" (click)="registerContestants(players)">Register Contestants</button><br>
     <button type="submit" (click)="autofill2Players()">Autofill 2 Players</button>
