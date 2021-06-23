@@ -40,8 +40,17 @@ export class RegistrationComponent implements OnInit {
     return player;
   }
 
+  toLowerCaseArray(players: string[]): string[] {
+    let lowerCasePlayers = [];
+    for (let i = 0; i < players.length; i++) {
+      lowerCasePlayers.push(players[i].toLowerCase());
+    }
+    return lowerCasePlayers;
+  }
+
   checkDuplicates(players: string[]) {
-    let enteredPlayers = players.filter(name => name != '');
+    let lowerCasePlayers = this.toLowerCaseArray(players);
+    let enteredPlayers = lowerCasePlayers.filter(name => name != '');
     let uniquePlayers = [];
 
     enteredPlayers.forEach(function(i){
@@ -70,7 +79,13 @@ export class RegistrationComponent implements OnInit {
     this.players = ['Sally','Joe','Cindy','Bob','Everett','Lewis','Anja','Li'];
   }
 
+  resetPlayers(): void {
+    this.players = ['','','','','','','',''];
+  }
+
   registerContestants(players: string[]) {
+    this.resetPlayers();
+    this.rosterService.clearContestants();
     for (let i = 0; i < players.length; i++) {
       if (players[i] == null) {
         this.players[i] = '';
