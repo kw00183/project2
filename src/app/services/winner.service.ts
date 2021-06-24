@@ -54,7 +54,7 @@ export class WinnerService {
     if (winners.length == 1) {
       this.finalWinner = winners[0];
       this.finalWinner$.next(this.finalWinner);
-    } else {
+    } else if (winners.length > 0) {
       this.incrementCurrentRound();
     }
     this.winners = winners;
